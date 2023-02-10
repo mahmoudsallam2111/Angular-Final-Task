@@ -1,0 +1,72 @@
+<div class="bg-light p-5">
+  <h2 class="text-center fw-bolder m-5">User Form</h2>
+  <form [formGroup]="userform" (ngSubmit)="login($event)">
+    <div class="mb-3">
+      <label for="exampleInputEmail1" class="form-label">Email address</label>
+      <input
+        [(ngModel)]="myuser.email"
+        type="email"
+        class="form-control"
+        id="exampleInputEmail1"
+        aria-describedby="emailHelp"
+        placeholder="enter your email "
+        formControlName="email"
+      />
+      <ng-container *ngIf="getemail.touched">
+        <div
+          *ngIf="getemail.hasError('required')"
+          id="emailHelp"
+          class="form-text text-danger"
+        >
+          Email is required
+        </div>
+
+        <div
+          *ngIf="getemail.hasError('email')"
+          id="emailHelp"
+          class="form-text text-danger"
+        >
+          Email is Not valid
+        </div>
+      </ng-container>
+    </div>
+    <div class="mb-3">
+      <label for="exampleInputPassword1" class="form-label">Password</label>
+      <input
+        [(ngModel)]="myuser.password"
+        type="password"
+        class="form-control"
+        id="exampleInputPassword1"
+        placeholder="enter your password"
+        formControlName="password"
+      />
+      <ng-container *ngIf="getpassword.touched">
+        <div
+          *ngIf="getpassword.hasError('required')"
+          id="emailHelp"
+          class="form-text text-danger"
+        >
+          Passwordis required
+        </div>
+
+        <div
+          *ngIf="getpassword.hasError('password')"
+          id="emailHelp"
+          class="form-text text-danger"
+        >
+          Password is Not valid (must be a least 5 characters)
+        </div>
+      </ng-container>
+    </div>
+
+    <button (click)="myfun()" type="submit" class="btn btn-primary">
+      {{ userID ? "edit user" : "add user" }}
+    </button>
+    <button (click)="clearfields()" class="btn btn-danger mx-5">
+      clear fields
+    </button>
+  </form>
+  <div *ngIf="flag" class="m-3 bg-success p-2 rounded">
+    user added successfully
+  </div>
+</div>
